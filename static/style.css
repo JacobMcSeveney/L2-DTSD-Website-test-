@@ -1,0 +1,130 @@
+@font-face {
+  font-family: DiamendRoundedRough;
+  src: url(DiamendRoundedRough-Regular_demo.otf);
+}
+
+* {
+  font-family: DiamendRoundedRough;
+}
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+/* General body styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Container styling */
+.container {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  width: 300px;
+  display: grid;
+}
+
+/* Image styling */
+.container img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px 15px 0 0;
+}
+
+/* Button styling */
+.container .btn {
+  background-color: #333;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.container .btn:hover {
+  background-color: #555;
+}
+
+/* Text styling */
+.container h4 {
+  color: #555;
+}
+
+.row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+ .cart {
+  position: fixed;
+  right: 10px;
+  top: 264px;
+  width: 300px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+}
+.cart-item button {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8b400; /* A warm pizza-like color */
+  padding: 20px;
+  border-bottom: 2px solid #e67e22;
+}
+
+.banner .logo {
+  height: 60px; /* Adjust the logo size */
+  margin-right: 20px;
+}
+
+.banner h1 {
+  font-family: 'Arial', sans-serif;
+  font-size: 36px;
+  color: #ffffff;
+  margin: 0;
+}

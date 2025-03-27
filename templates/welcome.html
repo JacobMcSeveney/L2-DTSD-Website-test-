@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Doughlicious</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        .delivery {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .pickup {
+            background-color: #2196F3;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Doughlicious!</h1>
+    <p>Please choose your order type:</p>
+    <form method="POST" action="/welcome">
+        <button type="submit" name="order_type" value="Delivery" class="button delivery">Delivery</button>
+        <button type="submit" name="order_type" value="Pick Up" class="button pickup">Pick Up</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Doughlicious</title>
+</head>
+<body>
+    <div class="banner">
+        <img src="/static/logo.png" alt="Doughlicious Pizza Logo" class="logo">
+        <h1>Doughlicious Pizza</h1>
+    </div>
+    
+    <div class="order-type">
+        <h3>Order Type: {{ session['order_type'] }}</h3>
+    </div>
+    <div class="cart">
+        <h2>Shopping Cart</h2>
+        <div id="cart-items"></div>
+    </div>
+
+    <br>
+    <h1>Welcome to Doughlicious Pizza!!</h1>
+    <h2>Please choose one of our quality pizzas to enjoy</h2>
+    <div class="row">
+        <div class="container">
+            <img src="/static/MeatLovers Pizza.jpg" alt="Meatlovers Pizza"  >
+            <button class="btn" onclick="addToCart('MeatLovers Pizza')">Order Now</button>
+            <input type="range" id="quantity-MeatLoversPizza" min="1" max="10" value="1" oninput="updateQuantity('MeatLoversPizza')">
+            <span id="quantity-display-MeatLoversPizza">1</span>
+            <b>Meatlovers Pizza</b>
+            <p>
+                Homemade thin crust pizza, topped off with two types of cheese, bacon, ham, pepperoni and hot sausage! A must make for meat lover’s.    
+            </p>
+        </div>
+        <div class="container">
+            <img src="/static/Cheese pizza.webp" alt="Cheese Pizza">
+            <button class="btn" onclick="addToCart('Cheese Pizza')">Order Now</button>
+            <input type="range" id="quantity-CheesePizza" min="1" max="10" value="1" oninput="updateQuantity('CheesePizza')">
+            <span id="quantity-display-CheesePizza">1</span>
+            <b>Cheese Pizza</b>
+            <p>
+                You will love this cheese pizza recipe that features a delicious chewy crust topped with gooey cheese that will rival your favorite pizzeria.    
+            </p>
+        </div>
+        <div class="container">
+            <img src="/static/pepperoni pizza.jpg" alt="Pepperoni Pizza">
+            <button class="btn" onclick="addToCart('Pepperoni Pizza')">Order Now</button>
+            <input type="range" id="quantity-PepperoniPizza" min="1" max="10" value="1" oninput="updateQuantity('PepperoniPizza')">
+            <span id="quantity-display-PepperoniPizza">1</span>
+            <b>Pepperoni Pizza</b>
+            <p>
+                This homemade pepperoni pizza has everything you want—a great crust, gooey cheese, and tons of pepperoni. The secret to great pepperoni flavor?    
+            </p>
+        </div>
+        <div class="container">
+            <img src="/static/veggiepizza.jpg" alt="Veggie Pizza">
+            <button class="btn" onclick="addToCart('Veggie Pizza')">Order Now</button>
+            <input type="range" id="quantity-VeggiePizza" min="1" max="10" value="1" oninput="updateQuantity('VeggiePizza')">
+            <span id="quantity-display-VeggiePizza">1</span>
+            <b>Veggie Pizza</b>
+            <p>
+                A delightful mix of fresh vegetables including bell peppers, onions, and olives, topped with mozzarella cheese on a crispy crust.
+            </p>
+        </div>
+        <div class="container">
+            <img src="/static/BBQ Chicken Pizza.jpg" alt="BBQ Chicken Pizza">
+            <button class="btn" onclick="addToCart('BBQ Chicken Pizza')">Order Now</button>
+            <input type="range" id="quantity-BBQChickenPizza" min="1" max="10" value="1" oninput="updateQuantity('BBQChickenPizza')">
+            <span id="quantity-display-BBQChickenPizza">1</span>
+            <b>BBQ Chicken Pizza</b>
+            <p>
+                A smoky and savory pizza topped with tender BBQ chicken, red onions, cilantro, and a tangy BBQ sauce base.
+            </p>
+        </div>
+        <div class="container">
+            <img src="/static/HawaiianPizza.jpg" alt="Hawaiian Pizza">
+            <button class="btn" onclick="addToCart('Hawaiian Pizza')">Order Now</button>
+            <input type="range" id="quantity-HawaiianPizza" min="1" max="10" value="1" oninput="updateQuantity('HawaiianPizza')">
+            <span id="quantity-display-HawaiianPizza">1</span>
+            <b>Hawaiian Pizza</b>
+            <p>
+                A tropical twist with sweet pineapple chunks, savory ham, and melted mozzarella cheese on a golden crust.
+            </p>
+        </div>
+        <div class="container">
+            <img src="/static/Margherita Pizza.webp" alt="Margherita Pizza">
+            <button class="btn" onclick="addToCart('Margherita Pizza')">Order Now</button>
+            <input type="range" id="quantity-MargheritaPizza" min="1" max="10" value="1" oninput="updateQuantity('MargheritaPizza')">
+            <span id="quantity-display-MargheritaPizza">1</span>
+            <b>Margherita Pizza</b>
+            <p>
+                A classic Italian pizza with a simple yet delicious combination of fresh tomatoes, mozzarella cheese, basil, and olive oil.
+            </p>
+        </div>
+        <div class="container">
+            <img src="/static/BuffaloChickenPizza.jpg" alt="Buffalo Chicken Pizza">
+            <button class="btn" onclick="addToCart('Buffalo Chicken Pizza')">Order Now</button>
+            <input type="range" id="quantity-BuffaloChickenPizza" min="1" max="10" value="1" oninput="updateQuantity('BuffaloChickenPizza')">
+            <span id="quantity-display-BuffaloChickenPizza">1</span>
+            <b>Buffalo Chicken Pizza</b>
+            <p>
+                A spicy and tangy pizza topped with buffalo chicken, red onions, and a drizzle of ranch or blue cheese dressing.
+            </p>
+        </div>
+        <div class="container">
+            <img src="/static/SupremePizza.png" alt="Supreme Pizza">
+            <button class="btn" onclick="addToCart('Supreme Pizza')">Order Now</button>
+            <input type="range" id="quantity-SupremePizza" min="1" max="10" value="1" oninput="updateQuantity('SupremePizza')">
+            <span id="quantity-display-SupremePizza">1</span>
+            <b>Supreme Pizza</b>
+            <p>
+                A loaded pizza with a variety of toppings including pepperoni, sausage, bell peppers, onions, mushrooms, and black olives.
+            </p>
+        </div>
+        <div class="container">
+            <img src="/static/WhitePizza.jpg" alt="White Pizza">
+            <button class="btn" onclick="addToCart('White Pizza')">Order Now</button>
+            <input type="range" id="quantity-WhitePizza" min="1" max="10" value="1" oninput="updateQuantity('WhitePizza')">
+            <span id="quantity-display-WhitePizza">1</span>
+            <b>White Pizza</b>
+            <p>
+                A creamy and cheesy pizza with a garlic-infused white sauce, ricotta, mozzarella, and Parmesan cheese.
+            </p>
+        </div>
+        <div class="container">
+            <img src="/static/MeatballPizza.jpg" alt="Meatball Pizza">
+            <button class="btn" onclick="addToCart('Meatball Pizza')">Order Now</button>
+            <input type="range" id="quantity-MeatballPizza" min="1" max="10" value="1" oninput="updateQuantity('MeatballPizza')">
+            <span id="quantity-display-MeatballPizza">1</span>
+            <b>Meatball Pizza</b>
+            <p>
+                A hearty pizza topped with juicy meatballs, marinara sauce, and a blend of mozzarella and Parmesan cheese.
+            </p>
+        </div>
+        <div class="container">
+            <img src="/static/New York Style Pizza.jpg" alt="New York Style Pizza">
+            <button class="btn" onclick="addToCart('New York Style Pizza')">Order Now</button>
+            <input type="range" id="quantity-NewYorkStylePizza" min="1" max="10" value="1" oninput="updateQuantity('NewYorkStylePizza')">
+            <span id="quantity-display-NewYorkStylePizza">1</span>
+            <b>New York Style Pizza</b>
+            <p>           
+            This New York-style pizza is topped with tomato sauce and mozzarella cheese, with any extra toppings placed on top of the cheese.
+            </p>
+        </div>
+    </div>
+
+    <script> // AI was used for this script
+        // Function to update the quantity display for a specific pizza
+        function updateQuantity(pizzaId) {
+            const slider = document.getElementById(`quantity-${pizzaId}`);
+            const display = document.getElementById(`quantity-display-${pizzaId}`);
+            display.innerText = slider.value; // Update the display span with the slider value
+        }
+
+        // Function to add an item to the cart with the selected quantity
+        function addToCart(item) {
+            const slider = document.getElementById(`quantity-${item.replace(' ', '')}`);
+            const quantity = slider ? slider.value : 1; // Get the quantity from the slider
+            fetch('/add_to_cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `item=${item}&quantity=${quantity}` // Pass the item and quantity to the backend
+            }).then(response => response.json())
+              .then(data => {
+                  if (data.success) {
+                      loadCart(); // Reload the cart after adding the item
+                  }
+              });
+        }
+
+        // Function to remove an item from the cart
+        function removeFromCart(item) {
+            // Send a POST request to the '/remove_from_cart' route with the item to be removed
+            fetch('/remove_from_cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `item=${item}` // Pass the item name in the request body
+            }).then(response => response.json()) // Parse the JSON response
+              .then(data => {
+                  if (data.success) {
+                      // Reload the cart if the item was successfully removed
+                      loadCart();
+                  }
+              });
+        }
+
+        // Function to load the cart data and display it
+        function loadCart() {
+            // Fetch the cart data from the '/cart_data' route
+            fetch('/cart_data')
+                .then(response => response.json()) // Parse the JSON response
+                .then(data => {
+                    const items = data.items; // Get the list of items from the response
+                    const cartItems = document.getElementById('cart-items'); // Get the cart container element
+                    cartItems.innerHTML = ''; // Clear the current cart display
+
+                    // Create an object to count the occurrences of each item
+                    const itemCounts = {};
+                    items.forEach(item => {
+                        itemCounts[item] = (itemCounts[item] || 0) + 1; // Increment the count for each item
+                    });
+
+                    // Loop through the items and their counts to display them in the cart
+                    for (const [item, count] of Object.entries(itemCounts)) {
+                        const div = document.createElement('div'); // Create a new div for each cart item
+                        div.className = 'cart-item'; // Add a class for styling
+                        div.innerHTML = `${item} x${count} <button onclick="removeFromCart('${item}')">x</button>`; // Display the item and its count, with a remove button
+                        cartItems.appendChild(div); // Add the item to the cart display
+                    }
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadCart);
+    </script>
+</body>
+</html>
