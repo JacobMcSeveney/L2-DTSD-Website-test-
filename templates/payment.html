@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Payment</title>
+</head>
+<body>
+    <h1>Payment Page</h1>
+
+    <!-- Cart Summary Section -->
+    <div id="cart-summary">
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <div id="cart-total" style="font-weight: bold; margin-top: 10px;"></div>
+    </div>
+
+    <!-- Payment Form -->
+    <form action="/process_payment" method="POST">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="card_number">Card Number:</label>
+        <input type="text" id="card_number" name="card_number" maxlength="19" required><br><br>
+
+        <label for="expiry_date">Expiry Date:</label>
+        <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" maxlength="5" required><br><br>
+
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" name="cvv" maxlength="4" required><br><br>
+
+        <button type="submit">Submit Payment</button>
+    </form>
+
+    <script>
+        // Auto-format expiry date
+        const expiryDateInput = document.getElementById('expiry_date');
+        expiryDateInput.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+            if (value.length > 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2); // Add '/' after the first two digits
+            }
+            e.target.value = value.slice(0, 5); // Limit to 5 characters (MM/YY)
+        });
+
+        // Ensure only numeric input for card number
+        const cardNumberInput = document.getElementById('card_number');
+        cardNumberInput.addEventListener('input', function (e) {
+            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 19); // Remove non-numeric characters and limit to 19 digits
+        });
+
+        // Load cart data and display it
+        function loadCart() {
+            fetch('/cart_data')
+                .then(response => response.json())
+                .then(data => {
+                    const cartItemsContainer = document.getElementById('cart-items');
+                    const cartTotalContainer = document.getElementById('cart-total');
+                    cartItemsContainer.innerHTML = ''; // Clear the cart display
+
+                    // Display each item in the cart with its price
+                    data.items.forEach(item => {
+                        const div = document.createElement('div');
+                        div.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+                        cartItemsContainer.appendChild(div);
+                    });
+
+                    // Display the total price
+                    cartTotalContainer.textContent = `Total: $${data.total_price.toFixed(2)}`;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Load the cart when the page loads
+        document.addEventListener('DOMContentLoaded', loadCart);
+    </script>
+</body>
+</html>
